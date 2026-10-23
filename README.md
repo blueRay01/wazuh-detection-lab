@@ -67,7 +67,7 @@ picks per connection.
 
 ![linux-endpoint showing Active in the dashboard](images/02-agent-active.png)
 
-## Attack 1 — SSH brute force
+## Attack 1 | SSH brute force
 
 **Method.** From Kali, confirmed SSH was reachable (`nc -zv 192.168.255.20 22`
 → open), then ran Hydra with a short wordlist of deliberately wrong passwords: hydra -l test -P wrongpasses.txt ssh://192.168.255.20
@@ -92,7 +92,7 @@ attack above the background of individual failures.
 failures within 120 seconds, then stay quiet for 60 so one attack can't spam
 thousands of identical alerts.
 
-## Attack 2 — Custom rule: successful root login
+## Attack 2 | Custom rule: successful root login
 
 **Goal.** Extend Wazuh beyond its built-in ruleset. A successful SSH login as
 `root` should never happen on a well-run host, but the built-in success rule
@@ -147,7 +147,7 @@ actually discriminates:
 > real login would mean enabling root SSH on the endpoint, which I deliberately
 > avoided.
 
-## Attack 3 — Port scan, and closing a blind spot
+## Attack 3 | Port scan, and closing a blind spot
 
 This is the core of the project: finding what the SIEM *couldn't* see, and
 fixing it.
