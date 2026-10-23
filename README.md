@@ -200,22 +200,12 @@ detected"**, my own rule naming the attack.
 
 ![Custom SYN-scan rule firing in Wazuh](images/10-custom-scan-rule-firing.png)
 
-> Scope note: this rule is deliberately simple. It would also fire on
+> Scope note: This rule is deliberately simple. It would also fire on
 > legitimate high-volume connections, and a slow scan (`nmap -T1`) could stay
 > under the threshold. A production rule would need tuning.
 
-## Problems and fixes
 
-| Problem | Fix |
-|---------|-----|
-| Wazuh service names guessed wrong (`manager` etc. showed `inactive`) | Correct units are `wazuh-manager`, `wazuh-indexer`, `wazuh-dashboard` |
-| `nmcli` rejected the static IP (`invalid property`) | Missing space after `ipv4.addresses`; retyped the command |
-| `wazuh-logtest`: `Field 'dstuser' is static` | Used the `<user>` tag instead of `<field name="dstuser">` |
-| Plain SYN scan produced no alert | Added Suricata (network IDS) + a custom SYN-scan rule |
-| Suricata watching `eth0`, which doesn't exist on this VM | Set `af-packet` interface to `ens33` |
-| `HOME_NET` set to `192.168.0.0/24`, excluding the lab subnet | Set it to `192.168.255.0/24` |
-
-## Key takeaways
+## Key Takeaways
 
 - Built a working SIEM pipeline end to end: endpoint logs → agent → manager →
   alert, verified at each stage.
@@ -226,7 +216,7 @@ detected"**, my own rule naming the attack.
 - Found and closed a real detection gap: a log-based SIEM doesn't see network
   scans, and a network IDS is the right tool to cover it.
 
-## Next steps
+## Next Steps
 
 - Add a Windows endpoint (Wazuh agent + Sysmon) to cover a mixed environment.
 - Tune the custom scan rule against slow scans and legitimate high-volume traffic.
